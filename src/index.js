@@ -2,16 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import rootReducer from 'store/modules'
+import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
+
+import rootReducer, { rootSaga } from 'store/modules'
 
 import App from './App';
 import 'styles/index.scss';
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -19,6 +24,7 @@ ReactDOM.render(
     </Provider>
     , document.getElementById('root')
 );
+sagaMiddleware.run(rootSaga)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login, logout, inputAccount, loginAsync } from '../store/modules/account';
+import { login, logout, inputAccount, } from '../store/modules/account';
 
 class LoginPage extends Component {
   handleLogin = (e) => {
     e.preventDefault()
-    this.props.loginAsync({
+    this.props.login({
       email:'test',
       password:'1111'
     });
@@ -35,13 +35,15 @@ class LoginPage extends Component {
 }
 
 //rootStore에서 원하는 store 꺼내온다
-const mapStateToProps = ({ accounts:{ email, password } }) => ({
+const mapStateToProps = ({ account:{ email, password } }) => ({
   email, password
 });
 
 //module에서 원하는 액션을 dispatch에 객체형태로 넘긴다
 const mapDispatchToProps = {
-  login, logout, inputAccount, loginAsync
+  login,
+  logout,
+  inputAccount, 
 };
 
 export default connect(
