@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { LOGIN, LOGOUT, INPUT_ACCOUNT } from 'store/actions/account'
 
 class LoginPage extends Component {
   handleLogin = (e) => {
@@ -25,8 +26,8 @@ class LoginPage extends Component {
       <div>
         {email}
         {password}
-        <input type="text" name="email" defaultValue={email} onKeyUp={(e)=>{this.inputAccount(e)}} ></input>
-        <input type="password" name="password" defaultValue={password} onKeyUp={(e)=>{this.inputAccount(e)}}></input>
+        <input type="text" name="email" value={email} onChange={(e)=>{this.inputAccount(e)}} ></input>
+        <input type="password" name="password" value={password} onChange={(e)=>{this.inputAccount(e)}}></input>
         <button onClick={(e)=>this.handleLogin(e)}>login</button>
       </div>
     );
@@ -38,14 +39,12 @@ const mapStateToProps = ({ account:{ email, password } }) => ({
   email, password
 });
 
-//module에서 원하는 액션을 dispatch로 넘긴다
-const mapDispatchToProps = dispatch => {
-  return {
-    login: (payload) => dispatch({ type: "account/LOGIN", payload}),
-    logout: () => dispatch({ type: "account/LOGOUT"}),
-    inputAccount: payload => dispatch({ type: "account/INPUT_ACCOUNT", payload}),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+    //props 메소드명 : dispatch로 호출할 액션함수
+    login: (payload) => dispatch({ type: LOGIN, payload}),
+    logout: () => dispatch({ type: LOGOUT}),
+    inputAccount: payload => dispatch({ type: INPUT_ACCOUNT, payload}),
+})
 
 export default connect(
   mapStateToProps,
