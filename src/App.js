@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import 'styles/App.scss';
 import LoginPage from 'containers/login'
+import AccountDetail from 'containers/accountDetail'
+import AccountList from 'containers/accountList'
 
 function App() {
   const [mode, setMode] = useState('on');
@@ -15,14 +13,19 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <div>
-          <Link to="/">home</Link>
-          <Link to="/sub1">sub1</Link>
-          <Link to="/sub2">sub2</Link>
+          <Link to="/">home</Link>&nbsp;&nbsp;
+          <Link to={`/account/${'tester'}`}>AccountDetail</Link>&nbsp;&nbsp;
+          <Link to="/account?sort=name">list</Link>
         </div>
         <Route exact path='/'>
-          <LoginPage source={mode}></LoginPage>
+          <LoginPage source={mode} />
         </Route>
-
+        <Route exact path='/account/:userId'>
+          <AccountDetail source={mode}/>
+        </Route>
+        <Route exact path='/account'>
+          <AccountList source={mode}></AccountList>
+        </Route>
         <button onClick={()=>{setMode('on')}}>set on</button>
         <button onClick={()=>{setMode('off')}}>set off</button>
         
