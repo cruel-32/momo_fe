@@ -1,9 +1,7 @@
 import React, { useState, useEffect, } from 'react';
 import { useDispatch, useSelector, } from 'react-redux';
 import { LOGIN, INPUT_ACCOUNT } from 'store/actions/account'
-import {
-  Link
-} from "react-router-dom";
+import { Link, } from "react-router-dom";
 
 const LoginPage = props => {
   

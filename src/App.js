@@ -20,7 +20,7 @@ function App() {
         <Route exact path='/'>
           <LoginPage source={mode} />
         </Route>
-        <Route exact path='/account/:userId'>
+        <Route exact path='/account/:_id'>
           <AccountDetail source={mode}/>
         </Route>
         <Route exact path='/account'>
