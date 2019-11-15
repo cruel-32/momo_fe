@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter,
+  Route,
+  Link
+} from "react-router-dom";
+
 import 'styles/App.scss';
 import LoginPage from 'containers/login'
 
@@ -7,27 +12,22 @@ function App() {
   const [mode, setMode] = useState('on');
 
   return (
-    <div className="App">
-      <LoginPage source={mode}></LoginPage>
+    <BrowserRouter>
+      <div className="App">
+        <div>
+          <Link to="/">home</Link>
+          <Link to="/sub1">sub1</Link>
+          <Link to="/sub2">sub2</Link>
+        </div>
+        <Route exact path='/'>
+          <LoginPage source={mode}></LoginPage>
+        </Route>
 
-      <button onClick={()=>{setMode('on')}}>set on</button>
-      <button onClick={()=>{setMode('off')}}>set off</button>
-      
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <button onClick={()=>{setMode('on')}}>set on</button>
+        <button onClick={()=>{setMode('off')}}>set off</button>
+        
+      </div>
+    </BrowserRouter>
   );
 }
 
