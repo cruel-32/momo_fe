@@ -14,11 +14,11 @@ export const LOGIN_FAILURE = 'account/LOGIN_FAILURE';
 function* loginAsync(action) {
     try {
         const {data} = yield axios.get(`http://localhost:12354/api/accounts`);
-        console.log('action : ', action);
+        console.log('LOGIN_SUCCESS action : ', action);
         console.log('data : ', data);
         yield put({ type: LOGIN_SUCCESS, payload: action.payload });
     } catch (e) {
-        console.log('e : ', e);
+        console.log('LOGIN_FAILURE e : ', e);
         yield put({ type: LOGIN_FAILURE, payload: e });
     }
 }
