@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import { LOGOUT, INPUT_ACCOUNT, LOGIN_SUCCESS, LOGIN_FAILURE } from 'store/actions/account'
+import { LOGOUT, LOGIN_SUCCESS, LOGIN_FAILURE } from 'store/actions/account'
 
 const initialState = {
     email: 'test@gmail.com',
@@ -21,10 +21,6 @@ const initialState = {
 export default handleActions({
     [LOGOUT]:(state)=>({
         ...state    
-    }),
-    [INPUT_ACCOUNT]:(state, action)=>({
-        ...state,
-        ...action.payload 
     }),
     [LOGIN_SUCCESS]:(state, action)=>({
         ...state,

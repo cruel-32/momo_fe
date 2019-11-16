@@ -15,7 +15,7 @@ function App() {
         <div>
           <Link to="/">home</Link>&nbsp;&nbsp;
           <Link to={`/account/${'tester'}`}>AccountDetail</Link>&nbsp;&nbsp;
-          <Link to="/account?sort=name">list</Link>
+          <Link to="/account?sort=name">list</Link>&nbsp;&nbsp;
         </div>
         <Route exact path='/'>
           <LoginPage source={mode} />

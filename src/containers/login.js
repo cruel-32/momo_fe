@@ -1,15 +1,19 @@
 import React, { useState, useEffect, } from 'react';
 import { useDispatch, useSelector, } from 'react-redux';
-import { LOGIN, INPUT_ACCOUNT } from 'store/actions/account'
+import { LOGIN } from 'store/actions/account'
 import { Link, } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+import { loginSchema  } from 'lib/validation/account'
+import { Formik } from "formik";
 
 const LoginPage = props => {
-  
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   
   const { email, password } = useSelector(store => store.account, [])
-  
+
   const countUp = e => {
     setCount(count+1);
   }
@@ -18,19 +22,8 @@ const LoginPage = props => {
     setCount(count-1);
   }
   
-  const inputAccount = e => {
-    const { target } = e;
-    
-    dispatch({ type: INPUT_ACCOUNT, payload:{
-      [target.name] : [target.value]
-    }})
-  }
-  
-  const handleLogin = e => {
-    dispatch({ type: LOGIN, payload:{
-      email: 'test',
-      password: '11111',
-    }})
+  const handleLogin = payload => {
+    dispatch({ type: LOGIN, payload})
   }
   
   useEffect(()=>{
@@ -47,8 +40,8 @@ const LoginPage = props => {
         <div>
           state : {count}
         </div>
-        <button onClick={countUp}>up</button>
-        <button onClick={countDown}>down</button>
+        <Button onClick={countUp}>up</Button>
+        <Button onClick={countDown}>down</Button>
       </div>
       
       <div>
@@ -61,9 +54,50 @@ const LoginPage = props => {
         <div>
           password : {password}
         </div>
-        <input type="text" name="email" value={email} onChange={inputAccount} ></input>
-        <input type="password" name="password" value={password} onChange={inputAccount}></input>
-        <button onClick={handleLogin}>login</button>
+
+        <Formik
+          initialValues={{email,password}}
+          onSubmit={handleLogin}
+          validationSchema={loginSchema}
+        >
+          {
+            props => {
+              const {
+                values,
+                handleSubmit,
+                handleChange,
+                errors,
+                touched
+              } = props;
+
+              return (
+                <form onSubmit={handleSubmit}>
+                  <TextField
+                    type="text"
+                    label="Email"
+                    name="email"
+                    placeholder="Email을 입력하세요"
+                    value={values.email}
+                    onChange={handleChange}
+                    helperText={(errors.email && touched.email) && errors.email}
+                  ></TextField>
+                  <TextField
+                    type="password"
+                    label="Password"
+                    name="password"
+                    placeholder="Password를 입력하세요"
+                    value={values.password}
+                    onChange={handleChange}
+                    helperText={(errors.password && touched.password) && errors.password}
+                  ></TextField>
+                  <Button type="submit">login</Button>
+                </form>
+              )
+            }
+          }
+        </Formik>
+        
+
       </div>
 
       <div>

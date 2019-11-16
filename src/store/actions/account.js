@@ -5,7 +5,6 @@ import axios from 'axios'
 // 액션 타입 정의
 export const LOGIN = 'account/LOGIN';
 export const LOGOUT = 'account/LOGOUT';
-export const INPUT_ACCOUNT = 'account/INPUT_ACCOUNT';
 
 export const LOGIN_SUCCESS = 'account/LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'account/LOGIN_FAILURE';
