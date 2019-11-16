@@ -7,12 +7,15 @@ import TextField from '@material-ui/core/TextField';
 
 import { loginSchema  } from 'lib/validation/account'
 import { Formik } from "formik";
+import { LOGOUT } from '../store/actions/account';
 
 const LoginPage = props => {
   const dispatch = useDispatch();
-  const [count, setCount] = useState(0);
-  
-  const { email, password } = useSelector(store => store.account, [])
+
+  const [ count, setCount ] = useState(0);
+  const [ email ] = useState('');
+  const [ password ] = useState('');
+  const account = useSelector(store => store.account, [])
 
   const countUp = e => {
     setCount(count+1);
@@ -24,6 +27,10 @@ const LoginPage = props => {
   
   const handleLogin = payload => {
     dispatch({ type: LOGIN, payload})
+  }
+
+  const handleLogout = () => {
+    dispatch({ type: LOGOUT })
   }
   
   useEffect(()=>{
@@ -48,55 +55,58 @@ const LoginPage = props => {
         <div>
           store props
         </div>
-        <div>
-          email : {email}
-        </div>
-        <div>
-          password : {password}
-        </div>
 
-        <Formik
-          initialValues={{email,password}}
-          onSubmit={handleLogin}
-          validationSchema={loginSchema}
-        >
-          {
-            props => {
-              const {
-                values,
-                handleSubmit,
-                handleChange,
-                errors,
-                touched
-              } = props;
+        {
+          account._id ? (
+            <div>
+              {account.username}
+              <Button onClick={handleLogout}>logout</Button>
+            </div>
+          ) : (
+            <Formik
+              initialValues={{email,password}}
+              onSubmit={handleLogin}
+              validationSchema={loginSchema}
+            >
+              {
+                props => {
+                  const {
+                    values,
+                    handleSubmit,
+                    handleChange,
+                    errors,
+                    touched
+                  } = props;
+    
+                  return (
+                    <form onSubmit={handleSubmit}>
+                      <TextField
+                        type="text"
+                        label="Email"
+                        name="email"
+                        placeholder="Email을 입력하세요"
+                        value={values.email}
+                        onChange={handleChange}
+                        helperText={(errors.email && touched.email) && errors.email}
+                      ></TextField>
+                      <TextField
+                        type="password"
+                        label="Password"
+                        name="password"
+                        placeholder="Password를 입력하세요"
+                        value={values.password}
+                        onChange={handleChange}
+                        helperText={(errors.password && touched.password) && errors.password}
+                      ></TextField>
+                      <Button type="submit">login</Button>
+                    </form>
+                  )
+                }
+              }
+            </Formik>
+          )
+        }
 
-              return (
-                <form onSubmit={handleSubmit}>
-                  <TextField
-                    type="text"
-                    label="Email"
-                    name="email"
-                    placeholder="Email을 입력하세요"
-                    value={values.email}
-                    onChange={handleChange}
-                    helperText={(errors.email && touched.email) && errors.email}
-                  ></TextField>
-                  <TextField
-                    type="password"
-                    label="Password"
-                    name="password"
-                    placeholder="Password를 입력하세요"
-                    value={values.password}
-                    onChange={handleChange}
-                    helperText={(errors.password && touched.password) && errors.password}
-                  ></TextField>
-                  <Button type="submit">login</Button>
-                </form>
-              )
-            }
-          }
-        </Formik>
-        
 
       </div>
 
