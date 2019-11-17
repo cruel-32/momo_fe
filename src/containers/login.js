@@ -1,13 +1,10 @@
 import React, { useState, useEffect, } from 'react';
 import { useDispatch, useSelector, } from 'react-redux';
-import { LOGIN } from 'store/actions/account'
+import { LOGIN_ASYNC, LOGOUT_ASYNC} from 'store/actions/account'
 import { Link, } from "react-router-dom";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-
+import { TextField, Button } from '@material-ui/core';
 import { loginSchema  } from 'lib/validation/account'
 import { Formik } from "formik";
-import { LOGOUT } from '../store/actions/account';
 
 const LoginPage = props => {
   const dispatch = useDispatch();
@@ -15,6 +12,7 @@ const LoginPage = props => {
   const [ count, setCount ] = useState(0);
   const [ email ] = useState('');
   const [ password ] = useState('');
+
   const account = useSelector(store => store.account, [])
 
   const countUp = e => {
@@ -26,11 +24,11 @@ const LoginPage = props => {
   }
   
   const handleLogin = payload => {
-    dispatch({ type: LOGIN, payload})
+    dispatch({ type: LOGIN_ASYNC, payload})
   }
 
   const handleLogout = () => {
-    dispatch({ type: LOGOUT })
+    dispatch({ type: LOGOUT_ASYNC })
   }
   
   useEffect(()=>{
