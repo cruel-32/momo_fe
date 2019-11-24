@@ -5,6 +5,7 @@ import 'styles/App.scss';
 import LoginPage from 'containers/login'
 import AccountDetail from 'containers/accountDetail'
 import AccountList from 'containers/accountList'
+import { Button } from '@material-ui/core';
 
 function App() {
   const [mode, setMode] = useState('on');
@@ -26,8 +27,8 @@ function App() {
         <Route exact path='/account'>
           <AccountList source={mode}></AccountList>
         </Route>
-        <button onClick={()=>{setMode('on')}}>set on</button>
-        <button onClick={()=>{setMode('off')}}>set off</button>
+        <Button className="app__button--on" onClick={()=>{setMode('on')}}>set on</Button>
+        <button className="app__button--off" onClick={()=>{setMode('off')}}>set off</button>
         
       </div>
     </BrowserRouter>
