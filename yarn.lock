@@ -9188,6 +9188,11 @@ tiny-invariant@^1.0.2:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.6.tgz#b3f9b38835e36a41c843a3b0907a5a7b3755de73"
 
+tiny-swiper-react@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/tiny-swiper-react/-/tiny-swiper-react-0.0.4.tgz#e9dab307a1b0e1596eef60e1fc80ae6eeea99358"
+  integrity sha512-K/TeFl6rraRb6Atm9DUF/raFHV9DCgLsCqr5cBly7CoXUKotflfoL5Da+NkwUD8QX0za5O7piZl9hkZVMzSc4w==
+
 tiny-warning@^1.0.0, tiny-warning@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
