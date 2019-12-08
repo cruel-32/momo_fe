@@ -10,8 +10,9 @@ import rootReducer from 'store/reducers'
 import rootSaga from 'store/actions'
 
 import App from './App';
-import 'styles/index.scss';
 import * as serviceWorker from './serviceWorker';
+import 'styles/normalize.scss';
+import 'styles/material-custom.scss';
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(

@@ -1,0 +1,9 @@
+@import 'variables';
+@import 'mixin';
+
+//draw - swipableDraw
+.MuiPaper-root.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft {
+  right: 0;
+  background:$peachy_pink;
+  border-radius: 0 40px 40px 0;
+}

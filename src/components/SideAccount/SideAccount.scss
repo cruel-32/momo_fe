@@ -1,0 +1,29 @@
+@import 'variables';
+@import 'mixin';
+
+.side-account {
+    &--side {
+        &-left {
+            display:flex;
+            height: 100%;
+        }
+    }
+
+    &__side-logged-account {
+        background:#fff;
+        width:220/720*100%;
+        border-radius: 0 40px 40px 0;
+        &--active {
+            width:500/720*100%;
+        }
+    }
+
+    &__side-club {
+        width:220/720*100%;
+        border-radius: 0 40px 40px 0;
+        background:$peachy_pink;
+        &--active {
+            width:500/720*100%;
+        }
+    }
+}

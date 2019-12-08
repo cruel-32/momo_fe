@@ -1,45 +1,35 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
-import LoginPage from 'containers/login'
-import AccountDetail from 'containers/accountDetail'
-import AccountList from 'containers/accountList'
+import LoginPage from 'pages/login'
+import AccountDetail from 'pages/accountDetail'
+import AccountList from 'pages/accountList'
 import { Button } from '@material-ui/core';
 
-import { TinySwiper } from 'tiny-swiper-react'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import { SideAccount } from 'components/SideAccount/SideAccount.js'
 
-import 'styles/App.scss';
-import img1 from 'images/1.png';
-import img2 from 'images/2.png';
-import img3 from 'images/3.png';
-
-
-
-function App() {
+const App = ()=>{
   const [mode, setMode] = useState('on');
 
-  const [ items ] = useState([
-    <img src={img1} className="App-logo" alt="logo" />,
-    <img src={img2} className="App-logo" alt="logo" />,
-    <img src={img3} className="App-logo" alt="logo" />,
-    <div>jsx 1</div>,
-    <div>jsx 2</div>,
-    <div>jsx 3</div>,
-  ])
+  const [sideState, setSideState] = useState({
+    left: true,
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setSideState({ ...sideState, [side]: open });
+  };
+
+
 
   return (
     <BrowserRouter>
       <div className="App">
         <div>
-          <TinySwiper
-            items={items}
-            useIndicator={true}
-            useDirector={true}
-            indicatorClass={"override"}
-            directorLeftClass={"override"}
-            directorRightClass={"override"}
-          >
-          </TinySwiper>
           <Link to="/">home</Link>&nbsp;&nbsp;
           <Link to={`/account/${'tester'}`}>AccountDetail</Link>&nbsp;&nbsp;
           <Link to="/account?sort=name">list</Link>&nbsp;&nbsp;
@@ -56,7 +46,22 @@ function App() {
         <Button className="app__button--on" onClick={()=>{setMode('on')}}>set on</Button>
         <button className="app__button--off" onClick={()=>{setMode('off')}}>set off</button>
         
+
+        
+        <Button onClick={toggleDrawer('left', true)}>Open Left</Button>
+
       </div>
+
+      <SwipeableDrawer
+        anchor="left"
+        open={sideState.left}
+        onClose={toggleDrawer('left', false)}
+        onOpen={toggleDrawer('left', true)}
+      >
+        <SideAccount></SideAccount>
+      </SwipeableDrawer>
+
+      
     </BrowserRouter>
   );
 }
