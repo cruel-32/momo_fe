@@ -7,7 +7,7 @@ import AccountList from 'pages/accountList'
 import { Button } from '@material-ui/core';
 
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { SideAccount } from 'components/SideAccount/SideAccount.js'
+import { SideMenu } from 'components/SideMenu/SideMenu.js'
 
 const App = ()=>{
   const [mode, setMode] = useState('on');
@@ -58,7 +58,7 @@ const App = ()=>{
         onClose={toggleDrawer('left', false)}
         onOpen={toggleDrawer('left', true)}
       >
-        <SideAccount></SideAccount>
+        <SideMenu></SideMenu>
       </SwipeableDrawer>
 
       
