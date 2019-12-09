@@ -9,7 +9,7 @@
         }
     }
 
-    &__side-logged-account {
+    &__side-account-menu {
         background:#fff;
         width:220/720*100%;
         border-radius: 0 40px 40px 0;
@@ -17,6 +17,26 @@
             width:500/720*100%;
         }
     }
+    
+    &__side-btn-wrap {
+        display:flex;
+        justify-content: flex-end;
+        &--pd {
+            padding:26px 24px;
+        }
+    }
+    
+    &__side-btn {
+        background:none;
+        border:none;
+    }
+
+    &__side-btn-img {
+        width:24px;
+        height:24px;
+    }
+
+
 
     &__side-club {
         width:220/720*100%;
