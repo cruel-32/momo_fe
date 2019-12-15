@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core';
 
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { SideMenu } from 'components/SideMenu/SideMenu.js'
+import 'styles/app.scss'
 
 const App = ()=>{
   const [mode, setMode] = useState('on');

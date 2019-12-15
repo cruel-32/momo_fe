@@ -10,34 +10,17 @@
     }
 
     &__side-account-menu {
+        position: relative;
         background:#fff;
         width:220/720*100%;
         border-radius: 0 40px 40px 0;
+        box-sizing: border-box;
+        padding:68px 21px 26px 21px;
         &--active {
             width:500/720*100%;
         }
     }
     
-    &__side-btn-wrap {
-        display:flex;
-        justify-content: flex-end;
-        &--pd {
-            padding:26px 24px;
-        }
-    }
-    
-    &__side-btn {
-        background:none;
-        border:none;
-    }
-
-    &__side-btn-img {
-        width:24px;
-        height:24px;
-    }
-
-
-
     &__side-club {
         width:220/720*100%;
         border-radius: 0 40px 40px 0;
@@ -47,3 +30,55 @@
         }
     }
 }
+
+
+.ico-btns {
+    display:flex;
+    justify-content: flex-end;
+
+    &--pos {
+        &-top-right {
+            position: absolute;
+            top:26px;
+            right:21px;
+        }
+    }
+    
+    &__btn {
+        background:none;
+        border:none;
+    }
+    
+    &__btn-img {
+        width:24px;
+        height:24px;
+    }
+}
+
+.user-info {
+    &__profile {
+        &--pd {
+            &-bot {
+                padding-bottom: 20px;
+            }
+        }
+    }
+    &__nickname {
+        font-size:20px;
+        color:#000;
+    }
+    &__btn {
+        &--round {
+            border:none;
+            border-radius: 24px;
+            padding:0 10px;
+            line-height: 20px;
+            background:#ff8d8a;
+            color:#fff;
+            font-size:12px;
+        }
+    }
+
+}
+
+
