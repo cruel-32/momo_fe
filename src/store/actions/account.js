@@ -16,7 +16,7 @@ export const SET_ACCOUNTS = 'account/SET_ACCOUNTS';
 //비동기 미들웨어 처리. 액션이 호출되면 리듀서까지 도달하기 전 해당 함수를 먼저 거쳐간다.
 function* loginAsync(action) {
     try {
-        const { data } = yield axios.post(`http://localhost:12354/api/accounts/auth`, action.payload);
+        const { data } = yield axios.post(`/api/accounts/auth`, action.payload);
 
         localStorage.setItem('account', JSON.stringify(data));
         
@@ -45,7 +45,7 @@ function* logoutAsync(action) {
     }
     
     try {
-        const { data, error } = yield axios.delete(`http://localhost:12354/api/accounts/auth`);
+        const { data, error } = yield axios.delete(`/api/accounts/auth`);
         
         if(data){
             localStorage.removeItem('account')
@@ -60,7 +60,7 @@ function* logoutAsync(action) {
 
 function* getAccounts(){
     try {
-        const { data, error } = yield axios.get(`http://localhost:12354/api/accounts`);
+        const { data, error } = yield axios.get(`/api/accounts`);
         
         if(data){
             yield put({ type: SET_ACCOUNTS, data });
