@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixin';
+
+.link-lists {
+    padding:0;
+    &__li {
+        list-style: none;
+        border-bottom: 1px solid #eee;
+        padding: 0;
+    }
+
+    &__link {
+        display:block;
+        color:#434343;
+        font-size: 14px;
+        padding:10px 10px;
+        text-decoration: none;
+    }
+}
