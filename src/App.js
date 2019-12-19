@@ -1,68 +1,32 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import { MainPage } from 'pages/MainPage/MainPage.js'
+import { LandingPage } from 'pages/LandingPage/LandingPage.js'
+import { SubPage } from 'pages/SubPage/SubPage.js'
 
-import LoginPage from 'pages/login'
-import AccountDetail from 'pages/accountDetail'
-import AccountList from 'pages/accountList'
-import { Button } from '@material-ui/core';
-
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { SideMenu } from 'components/SideMenu/SideMenu.js'
 import 'styles/app.scss'
 
 const App = ()=>{
-  const [mode, setMode] = useState('on');
-
-  const [sideState, setSideState] = useState({
-    left: true,
-  });
-
-  const toggleDrawer = (side, open) => event => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-    setSideState({ ...sideState, [side]: open });
-  };
-
-
+  const account = useSelector(store => store.account, [])
 
   return (
     <BrowserRouter>
       <div className="App">
-        <div>
-          <Link to="/">home</Link>&nbsp;&nbsp;
-          <Link to={`/account/${'tester'}`}>AccountDetail</Link>&nbsp;&nbsp;
-          <Link to="/account?sort=name">list</Link>&nbsp;&nbsp;
-        </div>
-        <Route exact path='/'>
-          <LoginPage source={mode} />
+        <Route exact path='/landing-page'>
+          <LandingPage />
+          {/* {account.email ?  <Redirect to="/" /> : <LandingPage />} */}
         </Route>
-        <Route exact path='/account/:_id'>
-          <AccountDetail source={mode}/>
-        </Route>
-        <Route exact path='/account'>
-          <AccountList source={mode}></AccountList>
-        </Route>
-        <Button className="app__button--on" onClick={()=>{setMode('on')}}>set on</Button>
-        <button className="app__button--off" onClick={()=>{setMode('off')}}>set off</button>
-        
 
-        
-        <Button onClick={toggleDrawer('left', true)}>Open Left</Button>
+        <Route exact path='/'>
+          {account.email ?  <MainPage /> : <Redirect to="/landing-page" />}
+        </Route>
+
+        <Route exact path='/sub-page'>
+          {account.email ?  <SubPage /> : <Redirect to="/landing-page" />}
+        </Route>
 
       </div>
-
-      <SwipeableDrawer
-        anchor="left"
-        open={sideState.left}
-        onClose={toggleDrawer('left', false)}
-        onOpen={toggleDrawer('left', true)}
-      >
-        <SideMenu></SideMenu>
-      </SwipeableDrawer>
-
-      
     </BrowserRouter>
   );
 }

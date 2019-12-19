@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useSelector, } from 'react-redux';
+
 import './SideMenu.scss'
 
 import { LinkLists } from 'components/LinkLists/LinkLists.js'
@@ -8,6 +10,8 @@ import btnBell from 'images/side-menu/btn_bell.svg'
 import profile from 'images/profile.png'
 
 export const SideMenu = () =>{
+    const account = useSelector(store => store.account, [])
+
     const [ listItems ] = useState([
         {text:'가입한 모임', src:'/',},
         {text:'공지사항', src:'/',},
@@ -24,14 +28,20 @@ export const SideMenu = () =>{
 
                 <section className="user-info">
                     <div className="user-info__profile user-info__profile--pd-bot">
-                        <img src={profile} alt="profile"/>
+                        <img src={account.thumbnail || profile} alt="profile"/>
                     </div>
                     <div className="user-info__intro">
                         <h1 className="user-info__nickname">
-                            라이언사랑
-                            <button className="user-info__btn--round">MY</button>
+                            {account.username || '로그인 하세요'}
+                            
+                            {
+                                account.email ?
+                                    <button className="user-info__btn--round">MY</button> : 
+                                    <button className="user-info__btn--round">LOGIN</button>
+                            }
+
                         </h1>
-                        <span className="user-info__email">ryan.love_@naver.com</span>
+                        <span className="user-info__email">{account.email || ''}</span>
                     </div>
                 </section>
 
