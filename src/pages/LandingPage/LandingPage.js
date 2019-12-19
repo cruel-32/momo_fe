@@ -18,7 +18,7 @@ export const LandingPage = props => {
         console.log('effect : 브라우저가 모두 그려지면 수행 ')
         if(account.email){
           console.log('go back : ', history)
-          history.goBack()
+          history.push('/')
         }
         return ()=>{
           console.log('effect!! end')

@@ -20,13 +20,13 @@ const App = ()=>{
           </Route>
 
           <Route exact path='/'>
-            {/* {account.email ?  <MainPage /> : <LandingPage />} */}
-            {account.email ?  <MainPage /> : <Redirect push to="/landing-page" />}
+            {account.email ?  <MainPage /> : <LandingPage />}
+            {/* {account.email ?  <MainPage /> : <Redirect push to="/landing-page" />} */}
           </Route>
 
           <Route exact path='/sub-page'>
-            {/* {account.email ?  <SubPage /> : <LandingPage />} */}
-            {account.email ?  <SubPage /> : <Redirect push to="/landing-page" />}
+            {account.email ?  <SubPage /> : <LandingPage />}
+            {/* {account.email ?  <SubPage /> : <Redirect push to="/landing-page" />} */}
           </Route>
         </Switch>
       </div>
