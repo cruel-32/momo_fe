@@ -6,8 +6,10 @@ import { useHistory } from 'react-router-dom'
 import { LoginForm } from 'components/LoginForm/LoginForm.js'
 
 export const LandingPage = props => {
-    console.log('LandingPage props : ', props)
     const history = useHistory();
+    console.log('LandingPage props : ', props)
+    console.log('LandingPage history : ', history)
+
     const account = useSelector(store => store.account, [])
 
     const [ isOpen, setIsOpen ] = useState(false)
@@ -16,7 +18,7 @@ export const LandingPage = props => {
         console.log('effect : 브라우저가 모두 그려지면 수행 ')
         if(account.email){
           console.log('go back : ', history)
-          history.push('/')
+          history.goBack()
         }
         return ()=>{
           console.log('effect!! end')

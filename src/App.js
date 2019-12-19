@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { MainPage } from 'pages/MainPage/MainPage.js'
 import { LandingPage } from 'pages/LandingPage/LandingPage.js'
@@ -13,19 +13,22 @@ const App = ()=>{
   return (
     <BrowserRouter>
       <div className="App">
-        <Route exact path='/landing-page'>
-          <LandingPage />
-          {/* {account.email ?  <Redirect to="/" /> : <LandingPage />} */}
-        </Route>
+        <Switch>
+          <Route exact path='/landing-page'>
+            <LandingPage />
+            {/* {account.email ?  <Redirect to="/" /> : <LandingPage />} */}
+          </Route>
 
-        <Route exact path='/'>
-          {account.email ?  <MainPage /> : <Redirect to="/landing-page" />}
-        </Route>
+          <Route exact path='/'>
+            {/* {account.email ?  <MainPage /> : <LandingPage />} */}
+            {account.email ?  <MainPage /> : <Redirect push to="/landing-page" />}
+          </Route>
 
-        <Route exact path='/sub-page'>
-          {account.email ?  <SubPage /> : <Redirect to="/landing-page" />}
-        </Route>
-
+          <Route exact path='/sub-page'>
+            {/* {account.email ?  <SubPage /> : <LandingPage />} */}
+            {account.email ?  <SubPage /> : <Redirect push to="/landing-page" />}
+          </Route>
+        </Switch>
       </div>
     </BrowserRouter>
   );
