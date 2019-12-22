@@ -19,7 +19,7 @@ export const MainPage = props => {
         setSideState({ ...sideState, [side]: open })
     }
 
-    const logout = e => {
+    const logout = () => {
         dispatch({ type: LOGOUT_ASYNC })
     }
 

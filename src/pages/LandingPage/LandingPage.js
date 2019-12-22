@@ -5,13 +5,9 @@ import { useHistory } from 'react-router-dom'
 
 import { LoginForm } from 'components/LoginForm/LoginForm.js'
 
-export const LandingPage = props => {
+export const LandingPage = () => {
     const history = useHistory();
-    console.log('LandingPage props : ', props)
-    console.log('LandingPage history : ', history)
-
     const account = useSelector(store => store.account, [])
-
     const [ isOpen, setIsOpen ] = useState(false)
 
     useEffect(()=>{
