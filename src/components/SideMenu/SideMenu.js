@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
-import { useSelector, } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { LOGOUT_ASYNC } from 'store/actions/account'
+import { Button, } from '@material-ui/core'
+
 
 import './SideMenu.scss'
 
 import { LinkLists } from 'components/LinkLists/LinkLists.js'
 
-import btnSet from 'images/side-menu/btn_set.svg'
-import btnBell from 'images/side-menu/btn_bell.svg'
+import btnSet from 'images/icons/btn_set.svg'
+import btnBell from 'images/icons/btn_bell.svg'
 import profile from 'images/profile.png'
 
 export const SideMenu = () =>{
+    const dispatch = useDispatch();
+
     const account = useSelector(store => store.account, [])
 
     const [ listItems ] = useState([
@@ -17,6 +22,10 @@ export const SideMenu = () =>{
         {text:'공지사항', src:'/',},
         {text:'자주하는 질문', src:'/',},
     ])
+
+    const logout = () => {
+        dispatch({ type: LOGOUT_ASYNC })
+    }
     
     return (
         <div className="side-menu side-menu--side-left">
@@ -46,6 +55,9 @@ export const SideMenu = () =>{
                 </section>
 
                 {listItems && <LinkLists items={listItems} />}
+
+                <Button onClick={logout}>Login Out</Button>
+
                     
             </div>
             <div className="side-menu__side-club">
