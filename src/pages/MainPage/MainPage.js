@@ -5,12 +5,8 @@ import { SideMenu } from 'components/SideMenu/SideMenu.js'
 import { Button, SwipeableDrawer } from '@material-ui/core'
 import { LOGOUT_ASYNC } from 'store/actions/account'
 
-import { useHistory } from 'react-router-dom'
-
-
 export const MainPage = props => {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const [sideState, setSideState] = useState({
         left: false,
@@ -27,14 +23,9 @@ export const MainPage = props => {
         dispatch({ type: LOGOUT_ASYNC })
     }
 
-    const goSubPage = e => {
-        history.push('/sub-page')
-    }
-
     return (
         <div>
             <Button onClick={logout}>Login Out</Button>
-            <Button onClick={goSubPage}>goSubPage</Button>
 
             <Button onClick={toggleDrawer('left', true)}>Open Left</Button>
             <SwipeableDrawer
