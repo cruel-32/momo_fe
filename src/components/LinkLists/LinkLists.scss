@@ -12,8 +12,8 @@
     &__link {
         display:block;
         color:#434343;
-        font-size: 14px;
-        padding:10px 10px;
+        @include vw("font-size", 28);
+        @include vw("padding", 20);
         text-decoration: none;
     }
 }

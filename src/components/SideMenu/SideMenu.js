@@ -40,15 +40,15 @@ export const SideMenu = () =>{
                         <img src={account.thumbnail || profile} alt="profile"/>
                     </div>
                     <div className="user-info__intro">
-                        <h1 className="user-info__nickname">
-                            {account.username || '로그인 하세요'}
-                            
+                        <h1 className="user-info__title">
+                            <span className="user-info__nickname">
+                                {account.username || '로그인 하세요'}
+                            </span>
                             {
                                 account.email ?
-                                    <button className="user-info__btn--round">MY</button> : 
-                                    <button className="user-info__btn--round">LOGIN</button>
+                                    <button className="user-info__btn user-info__btn--round">MY</button> : 
+                                    <button className="user-info__btn user-info__btn--round">LOGIN</button>
                             }
-
                         </h1>
                         <span className="user-info__email">{account.email || ''}</span>
                     </div>

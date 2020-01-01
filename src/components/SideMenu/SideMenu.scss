@@ -12,21 +12,21 @@
     &__side-account-menu {
         position: relative;
         background:#fff;
-        width:220/720*100%;
-        border-radius: 0 40px 40px 0;
+        @include vw("width", 220);
+        @include vw("border-radius", [0 48 48 0]);
         box-sizing: border-box;
-        padding:68px 21px 26px 21px;
+        @include vw("padding", [158 48 36 48]);
         &--active {
-            width:500/720*100%;
+            @include vw("width", 500);
         }
     }
     
     &__side-club {
-        width:220/720*100%;
-        border-radius: 0 40px 40px 0;
+        @include vw("width", 220);
+        @include vw("border-radius", [0 48 48 0]);
         background:$peachy_pink;
         &--active {
-            width:500/720*100%;
+            @include vw("width", 500);
         }
     }
 }
@@ -39,8 +39,8 @@
     &--pos {
         &-top-right {
             position: absolute;
-            top:26px;
-            right:21px;
+            @include vw("top", 48);
+            @include vw("right", 48);
         }
     }
     
@@ -50,33 +50,53 @@
     }
     
     &__btn-img {
-        width:24px;
-        height:24px;
+        @include vw("width", 48);
+        @include vw("height", 48);
     }
 }
 
 .user-info {
     &__profile {
+        @include vw("width", 180);
+        @include vw("height", 180);
+
         &--pd {
             &-bot {
-                padding-bottom: 20px;
+                @include vw("padding-bottom", 36);
             }
         }
     }
-    &__nickname {
-        font-size:20px;
-        color:#000;
+    &__intro {
+        vertical-align:top;
     }
+    &__title {
+        @include vw("font-size", 40);
+        margin: 0;
+        padding: 0;
+    }
+    &__nickname {
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+
+    
     &__btn {
+        font-weight:400;
         &--round {
             border:none;
-            border-radius: 24px;
-            padding:0 10px;
-            line-height: 20px;
+            @include vw("border-radius", 24);
+            @include vw("padding", [0 23]);
+            @include vw("line-height", 40);
+            @include vw("font-size", 24);
             background:#ff8d8a;
             color:#fff;
-            font-size:12px;
         }
+    }
+    &__email {
+        @include vw("font-size", 24);
+        font-weight:400;
+        color:#b8b8b8;
     }
 
 }

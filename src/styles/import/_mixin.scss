@@ -10,7 +10,7 @@
     }
 }
 
-@mixin vw-convert($prop, $pixel) {
+@mixin vw($prop, $pixel) {
     @if type-of($pixel) == number {
         #{$prop}: $pixel*100/720*1vw;
     }
