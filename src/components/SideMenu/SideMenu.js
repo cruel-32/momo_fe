@@ -35,10 +35,8 @@ export const SideMenu = () =>{
                     <button className="ico-btns__btn ico-btns__btn--bell "><img className="ico-btns__btn-img" src={btnBell} alt="bell" /></button>
                 </div>
 
-                <section className="user-info">
-                    <div className="user-info__profile user-info__profile--pd-bot">
-                        <img src={account.thumbnail || profile} alt="profile"/>
-                    </div>
+                <section className="user-info user-info--mg-bot">
+                    <img src={account.thumbnail || profile} alt="profile" className="user-info__profile user-info__profile--pd-bot" />
                     <div className="user-info__intro">
                         <h1 className="user-info__title">
                             <span className="user-info__nickname">
@@ -46,8 +44,8 @@ export const SideMenu = () =>{
                             </span>
                             {
                                 account.email ?
-                                    <button className="user-info__btn user-info__btn--round">MY</button> : 
-                                    <button className="user-info__btn user-info__btn--round">LOGIN</button>
+                                    <button className="user-info__btn">MY</button> : 
+                                    <button className="user-info__btn">LOGIN</button>
                             }
                         </h1>
                         <span className="user-info__email">{account.email || ''}</span>

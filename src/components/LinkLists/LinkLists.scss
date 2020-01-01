@@ -4,16 +4,20 @@
 .link-lists {
     padding:0;
     &__li {
+        &:first-child {
+            border-top: none;
+        }
         list-style: none;
-        border-bottom: 1px solid #eee;
+        border-top: 1px solid #eee;
         padding: 0;
     }
 
     &__link {
+        @include vw("font-size", 28);
+        @include vw("padding", (32 0));
         display:block;
         color:#434343;
-        @include vw("font-size", 28);
-        @include vw("padding", 20);
         text-decoration: none;
+        font-weight: 400;
     }
 }

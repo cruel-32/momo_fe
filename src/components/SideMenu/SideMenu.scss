@@ -13,9 +13,9 @@
         position: relative;
         background:#fff;
         @include vw("width", 220);
-        @include vw("border-radius", [0 48 48 0]);
+        @include vw("border-radius", (0 48 48 0));
         box-sizing: border-box;
-        @include vw("padding", [158 48 36 48]);
+        @include vw("padding", (158 48 36 48));
         &--active {
             @include vw("width", 500);
         }
@@ -23,7 +23,7 @@
     
     &__side-club {
         @include vw("width", 220);
-        @include vw("border-radius", [0 48 48 0]);
+        @include vw("border-radius", (0 48 48 0));
         background:$peachy_pink;
         &--active {
             @include vw("width", 500);
@@ -56,10 +56,15 @@
 }
 
 .user-info {
+    &--mg {
+        &-bot {
+            @include vw("margin-bottom", 40);
+        }
+    }
     &__profile {
+        display:block;
         @include vw("width", 180);
         @include vw("height", 180);
-
         &--pd {
             &-bot {
                 @include vw("padding-bottom", 36);
@@ -70,32 +75,31 @@
         vertical-align:top;
     }
     &__title {
-        @include vw("font-size", 40);
-        margin: 0;
+        @include vw("font-size", 50);
+        @include vw("margin", (0 0 10 0));
+        display:flex;
         padding: 0;
+        align-items: flex-end;
     }
     &__nickname {
         color:#000;
         margin: 0;
-        padding: 0;
+        @include vw("padding", (0 16 0 0));
     }
-
     
     &__btn {
         font-weight:400;
-        &--round {
-            border:none;
-            @include vw("border-radius", 24);
-            @include vw("padding", [0 23]);
-            @include vw("line-height", 40);
-            @include vw("font-size", 24);
-            background:#ff8d8a;
-            color:#fff;
-        }
+        border:none;
+        @include vw("border-radius", 24);
+        @include vw("padding", (0 23));
+        @include vw("line-height", 40);
+        @include vw("font-size", 24);
+        background:#ff8d8a;
+        color:#fff;
     }
     &__email {
         @include vw("font-size", 24);
-        font-weight:400;
+        font-weight:100;
         color:#b8b8b8;
     }
 
