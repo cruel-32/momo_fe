@@ -9,3 +9,36 @@
         @content;
     }
 }
+
+@mixin vw-convert($prop, $pixel) {
+    @if type-of($pixel) == number {
+        #{$prop}: $pixel*100/720*1vw;
+    }
+    @else if type-of($pixel) == string {
+        #{$prop}: auto;
+    }
+    @else if type-of($pixel) == list {
+        $px: ();
+        $vw: ();
+        @each $val in $pixel {
+            @if type-of($val) == number {
+                $vw: append($vw, $val*100/720*1vw);
+            }
+            @else if type-of($val) == string {
+                $vw: append($vw, auto);
+            }
+        }
+        #{$prop}:$vw;
+
+        $vw: ();
+
+        @each $val in $pixel {
+            @if type-of($val) == number {
+                $vw: append($vw, $val*100/360*1vw);
+            }
+            @else if type-of($val) == string {
+                $vw: append($vw, auto);
+            }
+        }
+    }
+}
