@@ -1,18 +1,7 @@
 // import {createAction } from 'redux-actions'
 import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios'
-
-// 액션 타입 정의
-export const LOGIN_ASYNC = 'account/LOGIN_ASYNC';
-export const LOGOUT_ASYNC = 'account/LOGOUT_ASYNC';
-
-export const SET_ACCOUNT = 'account/SET_ACCOUNT';
-export const RESET_ACCOUNT = 'account/RESET_ACCOUNT';
-
-export const GET_ACCOUNTS = 'account/GET_ACCOUNTS';
-export const SET_ACCOUNTS = 'account/SET_ACCOUNTS';
-
-export const GET_ACCOUNT_DETAIL_ASYNC = 'account/GET_ACCOUNT_DETAIL_ASYNC';
+import * as accountTypes from 'store/types/account'
 
 //비동기 미들웨어 처리. 액션이 호출되면 리듀서까지 도달하기 전 해당 함수를 먼저 거쳐간다.
 function* loginAsync(action) {
@@ -21,10 +10,10 @@ function* loginAsync(action) {
 
         localStorage.setItem('account', JSON.stringify(data));
 
-        yield put({ type: SET_ACCOUNT, payload: data });
+        yield put({ type: accountTypes.SET_ACCOUNT, payload: data });
     } catch (e) {
         localStorage.removeItem('account')
-        yield put({ type: RESET_ACCOUNT });
+        yield put({ type: accountTypes.RESET_ACCOUNT });
     }
 
 }
@@ -53,7 +42,7 @@ function* logoutAsync(action) {
         
         if(data){
             localStorage.removeItem('account')
-            yield put({ type: RESET_ACCOUNT, payload});
+            yield put({ type: accountTypes.RESET_ACCOUNT, payload});
         } else {
             throw error            
         }
@@ -67,7 +56,7 @@ function* getAccounts(){
         const { data, error } = yield axios.get(`/api/accounts`);
         
         if(data){
-            yield put({ type: SET_ACCOUNTS, payload: data });
+            yield put({ type: accountTypes.SET_ACCOUNTS, payload: data });
         } else {
             throw error            
         }
@@ -82,7 +71,7 @@ function* getAccountDetail(action){
         const { data, error } = yield axios.get(`/api/accounts/${action.payload._id}`);
         
         if(data){
-            yield put({ type: SET_ACCOUNT, payload: data });
+            yield put({ type: accountTypes.SET_ACCOUNT, payload: data });
         } else {
             throw error            
         }
@@ -93,8 +82,9 @@ function* getAccountDetail(action){
 }
 
 export default function* accountSaga() {
-    yield takeEvery(GET_ACCOUNT_DETAIL_ASYNC, getAccountDetail);
-    yield takeEvery(LOGIN_ASYNC, loginAsync);
-    yield takeEvery(LOGOUT_ASYNC, logoutAsync);
-    yield takeEvery(GET_ACCOUNTS, getAccounts);
+    console.log('accountSaga : ')
+    yield takeEvery(accountTypes.GET_ACCOUNT_DETAIL_ASYNC, getAccountDetail);
+    yield takeEvery(accountTypes.LOGIN_ASYNC, loginAsync);
+    yield takeEvery(accountTypes.LOGOUT_ASYNC, logoutAsync);
+    yield takeEvery(accountTypes.GET_ACCOUNTS, getAccounts);
 }

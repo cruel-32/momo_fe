@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { LOGOUT_ASYNC } from 'store/actions/account'
 import { Button, } from '@material-ui/core'
 import { Link } from "react-router-dom";
-import { GET_ACCOUNT_DETAIL_ASYNC, } from 'store/actions/account'
-
+import { LOGOUT_ASYNC } from 'store/types/account'
+import { GET_TOGETHERS_ASYNC } from 'store/types/together'
+import classnames from 'classnames'
 import './SideMenu.scss'
 
 import btnSet from 'images/icons/btn_set.svg'
@@ -17,6 +17,9 @@ export const SideMenu = () =>{
     const dispatch = useDispatch()
 
     const account = useSelector(store => store.account, [])
+    const together = useSelector(store => store.together, [])
+
+    const [ active, setActive ] = useState(true)
 
     const [ listItems ] = useState([
         {text:'가입한 모임', src:'/',},
@@ -28,19 +31,25 @@ export const SideMenu = () =>{
         dispatch({ type: LOGOUT_ASYNC })
     }
 
-    useEffect(()=>{
-        const { _id, togethers } = account
-    
-        if(_id && togethers == null){
-          dispatch({ type: GET_ACCOUNT_DETAIL_ASYNC, payload:{_id}})
-        }
-    }, [ account, dispatch ])
+    // useEffect(()=>{
+    //     console.log('SideMenu useEffect')
+    //     if(account.togethers){
+    //         console.log('account.togethers')
+    //         dispatch({type:GET_TOGETHERS_ASYNC, payload:{
+    //             target : 'myTogethers',
+    //             params : {
+    //                 _ids : account.togethers
+    //             }
+    //         }})
+    //     }
 
-    console.log('account : ', account)
+    // }, [ account, dispatch ])
 
     return (
-        <div className="side-menu side-menu--side-left">
-            <div className="side-menu__side-account-menu side-menu__side-account-menu--active">
+        <div className="side-menu side-menu--side-left" >
+            <div className={classnames("side-menu__side-account-menu",{
+                "side-menu__side-account-menu--active" : active
+            })}  onClick={e => setActive(true)} >
                 <div className="ico-btns ico-btns--pos-top-right">
                     <button className="ico-btns__btn ico-btns__btn--set "><img className="ico-btns__btn-img" src={btnSet} alt="set" /></button>
                     <button className="ico-btns__btn ico-btns__btn--bell "><img className="ico-btns__btn-img" src={btnBell} alt="bell" /></button>
@@ -77,16 +86,24 @@ export const SideMenu = () =>{
                 <Button onClick={logout}>Login Out</Button>
                     
             </div>
-            <div className="side-menu__side-club">
-                <ul className="my-club">
-                    <li className="my-club__li">
-                        <Link to="/" className="my-club__link">
-                            MATER
-                        </Link>
-                    </li>
-                </ul>
+            <div className={classnames("side-menu__side-club", {
+                "side-menu__side-club--active" : !active
+            })}  onClick={e => setActive(false)}>
+                <div className="my-club">
+                    <Link to='/' className="my-club__link">
+                        <img src={btnPlus} alt="모임 만들기" />
+                    </Link>
+                    {
+                        account.togethers && 
+                        account.togethers.map((together,i) => 
+                        <Link key={i} to={`/togethers/${together._id}`} className="my-club__link">
+                                {together.title}
+                            </Link>
+                        )
+                    }
+                </div>
+                <span className="side-menu__title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
 
-                <span className="side-menu__title">내 모임</span>
             </div>
         </div>
     )

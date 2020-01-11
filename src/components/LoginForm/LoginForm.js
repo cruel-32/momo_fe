@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { LOGIN_ASYNC, } from 'store/actions/account'
+import { LOGIN_ASYNC, } from 'store/types/account'
 import { TextField, Button } from '@material-ui/core'
 import { loginSchema  } from 'lib/validation/account'
 import { Formik } from "formik"

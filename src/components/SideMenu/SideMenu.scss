@@ -10,6 +10,7 @@
     }
 
     &__side-account-menu {
+        transition: width 0.2s ease;
         position: relative;
         background:#fff;
         @include vw("width", 220);
@@ -22,6 +23,7 @@
     }
     
     &__side-club {
+        transition: width 0.2s ease;
         @include vw("width", 220);
         @include vw("border-radius", (0 48 48 0));
         @include vw("padding", (159 19));
@@ -150,19 +152,21 @@
 .my-club {
     padding:0;
     margin:0;
-    .my-club__li {
-        list-style: none;
-        display:block;
-    }
+    display:flex;
+    flex-wrap: wrap;
+
+    justify-items: center;
+    justify-content: space-around;
+
     .my-club__link {
-        display:block;
         text-decoration: none;
         width: 100%;
+        @include vw("width", 206.8);
         @include vw("height", 206.8);
         @include vw("font-size", 24);
         @include vw("border-radius", 206.8);
         @include vw("line-height", 206.8);
-        
+
         text-align: center;
         font-weight:400;
 

@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import { SET_ACCOUNT, RESET_ACCOUNT, SET_ACCOUNTS } from 'store/actions/account'
+import { SET_ACCOUNT, RESET_ACCOUNT, SET_ACCOUNTS } from 'store/types/account'
 import produce from 'immer'
 
 const initailAccount = {
@@ -30,8 +30,7 @@ export default handleActions({
 
             Object.keys(payload).forEach(key => {
                 if(!draft[key] !== undefined) {
-                    console.log(key, ' : ', payload[key])
-                    draft[key] = payload[key] || ''
+                    draft[key] = payload[key] || null
                 }
             })
         }),
