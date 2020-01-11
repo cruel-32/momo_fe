@@ -1,0 +1,55 @@
+From 28733546a40594a34849919ab0838f44c751630c Mon Sep 17 00:00:00 2001
+From: "hyeong.kwak" <gudrb2361@gmail.com>
+Date: Wed, 1 Jan 2020 13:19:40 +0900
+Subject: [PATCH] mixin vw convert
+
+---
+ src/styles/import/_mixin.scss | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+
+diff --git a/src/styles/import/_mixin.scss b/src/styles/import/_mixin.scss
+index ab77a41..6edf731 100644
+--- a/src/styles/import/_mixin.scss
++++ b/src/styles/import/_mixin.scss
+@@ -8,4 +8,37 @@
+     @media screen and (min-width: getSize($size)) {
+         @content;
+     }
++}
++
++@mixin vw-convert($prop, $pixel) {
++    @if type-of($pixel) == number {
++        #{$prop}: $pixel*100/720*1vw;
++    }
++    @else if type-of($pixel) == string {
++        #{$prop}: auto;
++    }
++    @else if type-of($pixel) == list {
++        $px: ();
++        $vw: ();
++        @each $val in $pixel {
++            @if type-of($val) == number {
++                $vw: append($vw, $val*100/720*1vw);
++            }
++            @else if type-of($val) == string {
++                $vw: append($vw, auto);
++            }
++        }
++        #{$prop}:$vw;
++
++        $vw: ();
++
++        @each $val in $pixel {
++            @if type-of($val) == number {
++                $vw: append($vw, $val*100/360*1vw);
++            }
++            @else if type-of($val) == string {
++                $vw: append($vw, auto);
++            }
++        }
++    }
+ }
+\ No newline at end of file
+-- 
+2.22.0.windows.1
+

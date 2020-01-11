@@ -1,0 +1,64 @@
+@import 'variables';
+@import 'mixin';
+
+
+//card -> list
+.card {
+    .items {
+
+        .item-list {
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            width:100%;
+            @include vw(margin-top, 24);
+
+            &:first-child {
+                margin-top:0;
+            }
+
+            &__thumbnail {
+                // @include vw(width, 160);
+                // @include vw(height, 112);
+                flex-basis:27%;
+                margin: 0 3% 0 0;
+
+                img {
+                    width:100%;
+                    height:100%;
+                }
+            }
+
+            &__info {
+                flex-basis:70%;
+            }
+
+            &__desc {
+                @include vw(margin-top, 16);
+            }
+
+            &__title {
+                @include vw(width, 439);
+                @include vw(font-size, 28);
+                font-weight:500;
+                color:#000;
+            }
+
+            &__action {
+                @include vw(font-size, 24);
+                font-weight:normal;
+                color:#999;
+            }
+
+            &__personnel {
+                @include vw(margin-left, 28);
+                @include vw(font-size, 24);
+                font-weight:normal;
+                font-style:normal;
+                color:#ff9b96;
+            }
+
+        }
+
+    }
+}
