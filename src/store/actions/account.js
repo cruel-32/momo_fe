@@ -12,6 +12,7 @@ export const RESET_ACCOUNT = 'account/RESET_ACCOUNT';
 export const GET_ACCOUNTS = 'account/GET_ACCOUNTS';
 export const SET_ACCOUNTS = 'account/SET_ACCOUNTS';
 
+export const GET_ACCOUNT_DETAIL_ASYNC = 'account/GET_ACCOUNT_DETAIL_ASYNC';
 
 //비동기 미들웨어 처리. 액션이 호출되면 리듀서까지 도달하기 전 해당 함수를 먼저 거쳐간다.
 function* loginAsync(action) {
@@ -19,7 +20,7 @@ function* loginAsync(action) {
         const { data } = yield axios.post(`/api/accounts/auth`, action.payload);
 
         localStorage.setItem('account', JSON.stringify(data));
-        
+
         yield put({ type: SET_ACCOUNT, payload: data });
     } catch (e) {
         localStorage.removeItem('account')
@@ -27,6 +28,7 @@ function* loginAsync(action) {
     }
 
 }
+
 function* logoutAsync(action) {
     const payload = {
         email: null,
@@ -42,6 +44,8 @@ function* logoutAsync(action) {
         togethers: null,
         message: null,
         _id: null,
+        createdAt:null,
+        updatedAt:null,
     }
     
     try {
@@ -63,7 +67,7 @@ function* getAccounts(){
         const { data, error } = yield axios.get(`/api/accounts`);
         
         if(data){
-            yield put({ type: SET_ACCOUNTS, data });
+            yield put({ type: SET_ACCOUNTS, payload: data });
         } else {
             throw error            
         }
@@ -72,7 +76,24 @@ function* getAccounts(){
     }
 }
 
+function* getAccountDetail(action){
+    console.log('getAccountDetail action : ', action)
+    try {
+        const { data, error } = yield axios.get(`/api/accounts/${action.payload._id}`);
+        
+        if(data){
+            yield put({ type: SET_ACCOUNT, payload: data });
+        } else {
+            throw error            
+        }
+    } catch (e) {
+        console.error('목록 불러오기 : ', e)
+    }
+
+}
+
 export default function* accountSaga() {
+    yield takeEvery(GET_ACCOUNT_DETAIL_ASYNC, getAccountDetail);
     yield takeEvery(LOGIN_ASYNC, loginAsync);
     yield takeEvery(LOGOUT_ASYNC, logoutAsync);
     yield takeEvery(GET_ACCOUNTS, getAccounts);

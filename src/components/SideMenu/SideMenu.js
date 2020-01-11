@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { LOGOUT_ASYNC } from 'store/actions/account'
 import { Button, } from '@material-ui/core'
-
+import { Link } from "react-router-dom";
+import { GET_ACCOUNT_DETAIL_ASYNC, } from 'store/actions/account'
 
 import './SideMenu.scss'
-
-import { LinkLists } from 'components/LinkLists/LinkLists.js'
 
 import btnSet from 'images/icons/btn_set.svg'
 import btnBell from 'images/icons/btn_bell.svg'
 import profile from 'images/profile.png'
+import btnBack from 'images/icons/btn_back.svg'
+import btnPlus from 'images/icons/btn_plus.svg'
 
 export const SideMenu = () =>{
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const account = useSelector(store => store.account, [])
 
@@ -26,7 +27,17 @@ export const SideMenu = () =>{
     const logout = () => {
         dispatch({ type: LOGOUT_ASYNC })
     }
+
+    useEffect(()=>{
+        const { _id, togethers } = account
     
+        if(_id && togethers == null){
+          dispatch({ type: GET_ACCOUNT_DETAIL_ASYNC, payload:{_id}})
+        }
+    }, [ account, dispatch ])
+
+    console.log('account : ', account)
+
     return (
         <div className="side-menu side-menu--side-left">
             <div className="side-menu__side-account-menu side-menu__side-account-menu--active">
@@ -52,14 +63,30 @@ export const SideMenu = () =>{
                     </div>
                 </section>
 
-                {listItems && <LinkLists items={listItems} />}
+                <ul className="link-lists">
+                    {
+                        listItems.map((item,index)=>
+                            <li className="link-lists__li" key={index}>
+                                <Link to={item.src} className="link-lists__link" >{item.text}</Link>
+                                <img src={btnBack} alt="arrow_right" className="link-lists__icon link-lists__icon--arr-right" />
+                            </li>
+                        )
+                    }
+                </ul>
 
                 <Button onClick={logout}>Login Out</Button>
-
                     
             </div>
             <div className="side-menu__side-club">
+                <ul className="my-club">
+                    <li className="my-club__li">
+                        <Link to="/" className="my-club__link">
+                            MATER
+                        </Link>
+                    </li>
+                </ul>
 
+                <span className="side-menu__title">내 모임</span>
             </div>
         </div>
     )
