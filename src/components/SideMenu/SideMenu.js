@@ -122,8 +122,12 @@ export const SideMenu = props =>{
                     {
                         account.togethers && 
                         account.togethers.map((together,i) => 
-                        <Link key={i} to={`/togethers/${together._id}`} className="my-club__link">
+                            <Link key={i} to={`/togethers/${together._id}`} className="my-club__link">
                                 {together.title}
+                                {
+                                    account.owns && account.owns.includes(together._id) && 
+                                    <strong className="my-club__master-text" >MASTER</strong>
+                                }
                             </Link>
                         )
                     }

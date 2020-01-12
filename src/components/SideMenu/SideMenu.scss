@@ -172,12 +172,15 @@
     justify-content: space-around;
 
     .my-club__link {
+        flex-direction: column;
         justify-content: center;
         align-items:center;
         align-content:center;
         display:flex;
         text-decoration: none;
         width: 100%;
+        box-sizing: border-box;
+        @include vw("padding", 19);
         @include vw("width", 206.8);
         @include vw("height", 206.8);
         @include vw("margin-bottom", 19);
@@ -189,6 +192,11 @@
 
         color:$peachy_pink;
         background:$beige;
+        
+    }
+    &__master-text {
+        display:block;
+        @include vw("margin-top", 9);
     }
 }
 
