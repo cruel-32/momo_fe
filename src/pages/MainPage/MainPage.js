@@ -49,7 +49,7 @@ export const MainPage = props => {
                 onClose={toggleDrawer('left', false)}
                 onOpen={toggleDrawer('left', true)}
             >
-                <SideMenu></SideMenu>
+                <SideMenu setSideState={setSideState}></SideMenu>
             </SwipeableDrawer>
         </div>
     )

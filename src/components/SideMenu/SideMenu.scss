@@ -41,10 +41,22 @@
         text-align: center;
         color:#fff;
     }
+
+    &__btn-close {
+        position: absolute;
+        @include vw("top", 20);
+        @include vw("right", 20);
+
+        background: none;
+        border: none;
+
+        z-index: 10;
+    }
 }
 
 .link-lists {
     padding:0;
+    white-space: nowrap;
     &__li {
         &:first-child {
             border-top: none;
@@ -123,6 +135,7 @@
         display:flex;
         padding: 0;
         align-items: flex-end;
+        white-space: nowrap;
     }
     &__nickname {
         color:#000;
@@ -159,13 +172,17 @@
     justify-content: space-around;
 
     .my-club__link {
+        justify-content: center;
+        align-items:center;
+        align-content:center;
+        display:flex;
         text-decoration: none;
         width: 100%;
         @include vw("width", 206.8);
         @include vw("height", 206.8);
+        @include vw("margin-bottom", 19);
         @include vw("font-size", 24);
         @include vw("border-radius", 206.8);
-        @include vw("line-height", 206.8);
 
         text-align: center;
         font-weight:400;
