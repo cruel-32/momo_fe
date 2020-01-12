@@ -1,0 +1,37 @@
+@import 'variables';
+@import 'mixin';
+
+.scroller {
+    display:flex;
+    position: relative;
+    max-height: 100%;
+
+    &__content-wrap {
+        display:flex;
+        max-height: 100%;
+        align-content: flex-start;
+        overflow: auto;
+    }
+
+    &:before {
+        content:"";
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        @include vw("height", 120);
+        background: linear-gradient(to bottom, #ff8d8a 0%,rgba(255,255,255,0) 100%);
+    }
+    &:after {
+        content:"";
+        position: absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        @include vw("height", 120);
+        background: linear-gradient(to top, #ff8d8a 0%,rgba(255,255,255,0) 100%);
+    }
+
+}
+
+
