@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, } from '@material-ui/core'
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { LOGOUT_ASYNC } from 'store/types/account'
 import classnames from 'classnames'
 import './SideMenu.scss'
 
-import { Scroller } from 'components/Scroller/Scroller'
+import { InfinitScroll } from 'components/InfinitScroll/InfinitScroll'
 
 import btnSet from 'images/icons/btn_set.svg'
 import btnSetActive from 'images/icons/btn_set_active.svg'
@@ -21,6 +21,7 @@ export const SideMenu = props =>{
     const dispatch = useDispatch()
     const account = useSelector(store => store.account, [])
     const { setSideState } = props
+    const scrollRef = useRef(null)
 
     const [ accActive, setAccActive ] = useState(true)
     const [ clubActive, setclubActive ] = useState(false)
@@ -52,6 +53,12 @@ export const SideMenu = props =>{
             }, 200)
         }
     }
+
+    useEffect(()=>{
+        console.log('useEffect scrollRef.current : ', scrollRef.current)
+        
+
+    }, [ scrollRef ])
 
     return (
         <div className="side-menu side-menu--side-left" >
@@ -113,59 +120,66 @@ export const SideMenu = props =>{
                 }
                     
             </div>
-            <div className={classnames("side-menu__side-club", {
-                "side-menu__side-club--active" : clubActive
-            })}  onClick={toggleClubState}>
-                <Scroller style={{
-                    "padding" : "21.94444vw 0"
-                }}>
-                    <ul className="my-club">
+            <div
+                className={classnames("side-menu__side-club", {
+                    "side-menu__side-club--active" : clubActive
+                })}
+                onClick={toggleClubState}
+                ref={scrollRef}
+            >
+                <InfinitScroll
+                    gradientColor="#ff8d8a"
+                    style={{
+                        "height" : "calc(100% - 20vw)"
+                    }}
+                >
+                    <ul className="admin-menu">
                         {
-                            account.owns.length ?
+                            account.owns && account.owns.length ?
                                 account.owns.map((together,i) =>
-                                    <li className="my-club__item">
-                                        <Link key={i} to={`/togethers/${together._id}`} className="my-club__link">
+                                    <li className="admin-menu__item">
+                                        <Link key={i} to={`/togethers/${together._id}`} className="admin-menu__link">
                                             {together.title}
-                                            <strong className="my-club__master-text" >MASTER</strong>
+                                            <strong className="admin-menu__master-text" >MASTER</strong>
                                         </Link>
-                                        <span className="side-menu__title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
+                                        <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
                                     </li>
                                 )
                             :
-                                <li className="my-club__item">
-                                    <Link to='/' className="my-club__link">
+                                <li className="admin-menu__item">
+                                    <Link to='/' className="admin-menu__link">
                                         <img src={btnPlus} alt="모임 만들기" />
                                     </Link>
-                                    <span className="side-menu__title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
+                                    <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
                                 </li>
                         }
-                        <li className="my-club__item">
-                            <Link to='/' className="my-club__link">
+                        <li className="admin-menu__item">
+                            <Link to='/' className="admin-menu__link">
                                 <img src={btnPlus} alt="모임 만들기" />
                             </Link>
-                            <span className="side-menu__title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
+                            <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
                         </li>
-                        <li className="my-club__item">
-                            <Link to='/' className="my-club__link">
+                        <li className="admin-menu__item">
+                            <Link to='/' className="admin-menu__link">
                                 <img src={btnPlus} alt="모임 만들기" />
                             </Link>
-                            <span className="side-menu__title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
+                            <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
                         </li>
-                        <li className="my-club__item">
-                            <Link to='/' className="my-club__link">
+                        <li className="admin-menu__item">
+                            <Link to='/' className="admin-menu__link">
                                 <img src={btnPlus} alt="모임 만들기" />
                             </Link>
-                            <span className="side-menu__title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
+                            <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
                         </li>
-                        <li className="my-club__item">
-                            <Link to='/' className="my-club__link">
+                        <li className="admin-menu__item">
+                            <Link to='/' className="admin-menu__link">
                                 <img src={btnPlus} alt="모임 만들기" />
                             </Link>
-                            <span className="side-menu__title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
+                            <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
                         </li>
                         
                     </ul>
-                </Scroller>
+                </InfinitScroll>
             </div>
         </div>
     )

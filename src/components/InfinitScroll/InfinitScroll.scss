@@ -1,0 +1,28 @@
+@import 'variables';
+@import 'mixin';
+
+.infinit-scroll {
+    position: relative;
+    display:flex;
+    height:100%;
+    overflow: auto;
+
+    &__gradient {
+        position: absolute;
+        left:0;
+        right:0;
+        @include vw("height", 120);
+
+        &--pos {
+            &-top {
+                top:0;
+            }
+            &-bot {
+                bottom:0;
+            }
+        }
+    }
+
+}
+
+

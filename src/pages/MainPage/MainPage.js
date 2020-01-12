@@ -10,7 +10,7 @@ import btnMenu from 'images/icons/btn_menu.svg'
 
 export const MainPage = props => {
     const [sideState, setSideState] = useState({
-        left: false,
+        left: true,
     })
 
     const toggleDrawer = (side, open) => event => {

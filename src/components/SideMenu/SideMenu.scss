@@ -37,14 +37,6 @@
         }
     }
 
-    &__title {
-        @include vw("font-size", 40);
-        @include vw("padding-top", 40);
-        display:block;
-        text-align: center;
-        color:#fff;
-    }
-
     &__btn-close {
         position: absolute;
         @include vw("top", 20);
@@ -174,25 +166,25 @@
 }
 
 
-.my-club {
+.admin-menu {
     @include vw("padding", (158, 0));
     margin:0;
     display:flex;
     flex-wrap: wrap;
     width: 100%;
-
     justify-items: center;
     justify-content: space-between;
     align-content: flex-start;
+    overflow:auto;
 
-    .my-club__item {
+    &__item {
         list-style: none;
         text-align: center;
         @include vw("width", 180);
-        @include vw("margin", (19 0 50 0));
+        @include vw("margin", (0 0 50 0));
     }
 
-    .my-club__link {
+    &__link {
         flex-direction: column;
         justify-content: center;
         align-items:center;
@@ -201,6 +193,7 @@
         text-decoration: none;
         width: 100%;
         box-sizing: border-box;
+        
         @include vw("padding", 19);
         @include vw("width", 180);
         @include vw("height", 180);
@@ -214,9 +207,13 @@
         background:$beige;
         
     }
-    &__master-text {
+
+    &__item-title {
+        @include vw("font-size", 40);
+        @include vw("padding-top", 40);
         display:block;
-        @include vw("margin-top", 36);
+        text-align: center;
+        color:#fff;
     }
 }
 
