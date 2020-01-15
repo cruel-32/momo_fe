@@ -130,7 +130,7 @@ export const SideMenu = props =>{
                 <InfinitScroll
                     gradientColor="#ff8d8a"
                     style={{
-                        "height" : "calc(100% - 20vw)"
+                        "height" : "calc(100% - 5vw)"
                     }}
                 >
                     <ul className="admin-menu">

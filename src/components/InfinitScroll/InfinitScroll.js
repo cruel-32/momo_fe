@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { throttle } from 'throttle-debounce'
 import './InfinitScroll.scss'
 
 export const InfinitScroll = props =>{
@@ -10,14 +10,15 @@ export const InfinitScroll = props =>{
         style,
     } = props
 
-    console.log('InfinitScroll api : ', api)
 
-    const scroll = e => {
-        console.log('e : ', e)
-    }
+
+    const throttled = throttle(300, (e) => {
+        // Throttled function
+        console.log('throttled e : ', e)
+    });
 
     return (
-        <div className="infinit-scroll" style={style} onScroll={e=>{scroll(e)}}>
+        <div className="infinit-scroll" style={style} onScroll={throttled}>
             <div className="infinit-scroll__gradient infinit-scroll__gradient--pos-top"
                 style={{
 
