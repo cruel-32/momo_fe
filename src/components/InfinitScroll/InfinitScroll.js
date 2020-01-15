@@ -5,32 +5,36 @@ import './InfinitScroll.scss'
 export const InfinitScroll = props =>{
     const {
         children,
-        api,
+        onScroll,
         gradientColor,
         style,
+        fps=300
     } = props
 
-
-
-    const throttled = throttle(300, (e) => {
-        // Throttled function
-        console.log('throttled e : ', e)
+    const throttled = throttle(fps, (e) => {
+        onScroll && onScroll(e)
     });
 
     return (
         <div className="infinit-scroll" style={style} onScroll={throttled}>
-            <div className="infinit-scroll__gradient infinit-scroll__gradient--pos-top"
-                style={{
+            {
+                gradientColor &&
+                <div className="infinit-scroll__gradient infinit-scroll__gradient--pos-top"
+                    style={{
 
-                    "background" : `linear-gradient(to bottom, ${gradientColor || '#fff'} 0%,rgba(255,255,255,0) 100%)`
-                }}
-            ></div>
+                        "background" : `linear-gradient(to bottom, ${gradientColor || '#fff'} 0%,rgba(255,255,255,0) 100%)`
+                    }}
+                ></div>
+            }
             {children}
-            <div className="infinit-scroll__gradient infinit-scroll__gradient--pos-bot"
-                style={{
-                    "background" : `linear-gradient(to top, ${gradientColor || '#fff'} 0%,rgba(255,255,255,0) 100%)`
-                }}
-            ></div>
+            {
+                gradientColor &&
+                <div className="infinit-scroll__gradient infinit-scroll__gradient--pos-bot"
+                    style={{
+                        "background" : `linear-gradient(to top, ${gradientColor || '#fff'} 0%,rgba(255,255,255,0) 100%)`
+                    }}
+                ></div>
+            }
         </div>
     )
 }

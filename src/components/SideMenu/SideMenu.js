@@ -54,6 +54,10 @@ export const SideMenu = props =>{
         }
     }
 
+    const getEventTest = e => {
+        console.log('getEventTest e : ', e)
+    }
+
     useEffect(()=>{
         console.log('useEffect scrollRef.current : ', scrollRef.current)
         
@@ -129,6 +133,7 @@ export const SideMenu = props =>{
             >
                 <InfinitScroll
                     gradientColor="#ff8d8a"
+                    onScroll={getEventTest}
                     style={{
                         "height" : "calc(100% - 5vw)"
                     }}
