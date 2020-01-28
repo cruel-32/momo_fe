@@ -78,7 +78,27 @@ function* getAccountDetail(action){
     } catch (e) {
         console.error('목록 불러오기 : ', e)
     }
+}
 
+function* postProfile(action){
+    console.log('postProfile action : ', action)
+    const { _id, formData } = action.payload
+    try {
+        const { data, error } = yield axios.post(`/api/accounts/${_id}/profile`, formData, {
+            headers : {
+                'Content-Type' : 'multipart/form-data'
+            }
+        });
+        
+        if(data){
+            console.log('postProfile data : ', data)
+            // yield put({ type: accountTypes.SET_ACCOUNT, payload: data });
+        } else {
+            throw error            
+        }
+    } catch (e) {
+        console.error('목록 불러오기 : ', e)
+    }
 }
 
 export default function* accountSaga() {
@@ -87,4 +107,5 @@ export default function* accountSaga() {
     yield takeEvery(accountTypes.LOGIN_ASYNC, loginAsync);
     yield takeEvery(accountTypes.LOGOUT_ASYNC, logoutAsync);
     yield takeEvery(accountTypes.GET_ACCOUNTS, getAccounts);
+    yield takeEvery(accountTypes.UPLOAD_PROFILE, postProfile);
 }

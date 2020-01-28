@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, } from '@material-ui/core'
 import { Link } from "react-router-dom";
-import { LOGOUT_ASYNC } from 'store/types/account'
 import classnames from 'classnames'
-import './SideMenu.scss'
+
+import { LOGOUT_ASYNC, UPLOAD_PROFILE } from 'store/types/account'
 
 import { InfinitScroll } from 'components/InfinitScroll/InfinitScroll'
+
+import './SideMenu.scss'
+
 
 import btnSet from 'images/icons/btn_set.svg'
 import btnSetActive from 'images/icons/btn_set_active.svg'
@@ -64,6 +68,25 @@ export const SideMenu = props =>{
 
     }, [ scrollRef ])
 
+
+    const upTest = () => {
+        const { files, name } = document.querySelector('[name=profile]')
+
+        console.log('files : ', files)
+        console.log('name : ', name)
+        
+        if(files.length){
+            const formData = new FormData()
+            
+            formData.append(name, files[0])
+
+            dispatch({ type: UPLOAD_PROFILE, payload : {
+                _id : '5d218f080b1d6d4cac321b73',
+                formData
+            }})
+        }
+    }
+
     return (
         <div className="side-menu side-menu--side-left" >
             <button
@@ -85,9 +108,16 @@ export const SideMenu = props =>{
                         <img className="ico-btns__btn-img" src={btnBell} alt="bell" />
                     </button>
                 </div>
+
+                    <input type="file" name="profile" />
+                    <input type="button" name="img_up" onClick={upTest} value="업로드" />
                 
                 <section className="user-info user-info--mg-bot">
-                    <img src={account.thumbnail || profile} alt="profile" className="user-info__profile user-info__profile--pd-bot" />
+                    <img
+                        src={account.thumbnail || profile}
+                        alt="profile"
+                        className="user-info__profile user-info__profile--pd-bot"
+                    />
                     {
                         <div className="user-info__intro">
                             <h1 className="user-info__title">
@@ -96,11 +126,18 @@ export const SideMenu = props =>{
                                 </span>
                                 {   
                                     account.email ?
-                                    <button className={classnames('user-info__btn', {'none' : !accActive})}>MY</button> : 
-                                    <button className={classnames('user-info__btn', {'none' : !accActive})}>LOGIN</button>
+                                        <button className={classnames('user-info__btn', {
+                                            'none' : !accActive
+                                        })}>MY</button>
+                                    : 
+                                        <button className={classnames('user-info__btn', {
+                                            'none' : !accActive
+                                        })}>LOGIN</button>
                                 }
                             </h1>
-                            <span className={classnames("user-info__email", {'none' : !accActive})}>
+                            <span className={classnames("user-info__email", {
+                                'none' : !accActive
+                            })}>
                                 {account.email || ''}
                             </span>
                         </div>
@@ -158,7 +195,7 @@ export const SideMenu = props =>{
                                     <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
                                 </li>
                         }
-                        <li className="admin-menu__item">
+                        {/* <li className="admin-menu__item">
                             <Link to='/' className="admin-menu__link">
                                 <img src={btnPlus} alt="모임 만들기" />
                             </Link>
@@ -181,7 +218,7 @@ export const SideMenu = props =>{
                                 <img src={btnPlus} alt="모임 만들기" />
                             </Link>
                             <span className="admin-menu__item-title">{account.togethers ? '내 모임' : '모임 만들기'}</span>
-                        </li>
+                        </li> */}
                         
                     </ul>
                 </InfinitScroll>
