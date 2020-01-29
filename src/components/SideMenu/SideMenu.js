@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, } from '@material-ui/core'
 import { Link } from "react-router-dom";
@@ -8,6 +7,7 @@ import classnames from 'classnames'
 import { LOGOUT_ASYNC, UPLOAD_PROFILE } from 'store/types/account'
 
 import { InfinitScroll } from 'components/InfinitScroll/InfinitScroll'
+import { KakaoShareButton } from 'components/SNS/Share'
 
 import './SideMenu.scss'
 
@@ -111,6 +111,8 @@ export const SideMenu = props =>{
 
                     <input type="file" name="profile" />
                     <input type="button" name="img_up" onClick={upTest} value="업로드" />
+
+                    <KakaoShareButton />
                 
                 <section className="user-info user-info--mg-bot">
                     <img
