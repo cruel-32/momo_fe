@@ -11,3 +11,6 @@ export const SET_ACCOUNTS = 'account/SET_ACCOUNTS';
 export const GET_ACCOUNT_DETAIL_ASYNC = 'account/GET_ACCOUNT_DETAIL_ASYNC';
 
 export const UPLOAD_PROFILE = 'account/UPLOAD_PROFILE';
+export const UPDATE_PROFILE = 'account/UPDATE_PROFILE';
+
+export const UPDATE_ACCOUNT = 'account/UPDATE_ACCOUNT';

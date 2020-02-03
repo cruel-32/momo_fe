@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, } from '@material-ui/core'
 import { Link } from "react-router-dom";
@@ -9,17 +8,16 @@ import { LOGOUT_ASYNC, UPLOAD_PROFILE } from 'store/types/account'
 
 import { InfinitScroll } from 'components/InfinitScroll/InfinitScroll'
 
-import './SideMenu.scss'
-
-
 import btnSet from 'images/icons/btn_set.svg'
 import btnSetActive from 'images/icons/btn_set_active.svg'
 import btnBell from 'images/icons/btn_bell.svg'
 import btnBellActive from 'images/icons/btn_bell_active.svg'
-import profile from 'images/profile.png'
 import btnBack from 'images/icons/btn_back.svg'
 import btnPlus from 'images/icons/btn_plus.svg'
 import btnClose from 'images/icons/btn_close.svg'
+
+import './SideMenu.scss'
+
 
 export const SideMenu = props =>{
     const dispatch = useDispatch()
@@ -69,12 +67,10 @@ export const SideMenu = props =>{
     }, [ scrollRef ])
 
 
-    const upTest = () => {
+    const uploadProfile = () => {
         const { files, name } = document.querySelector('[name=profile]')
 
-        console.log('files : ', files)
-        console.log('name : ', name)
-        
+        //용량체크 필요
         if(files.length){
             const formData = new FormData()
             
@@ -109,15 +105,16 @@ export const SideMenu = props =>{
                     </button>
                 </div>
 
-                    <input type="file" name="profile" />
-                    <input type="button" name="img_up" onClick={upTest} value="업로드" />
                 
                 <section className="user-info user-info--mg-bot">
-                    <img
-                        src={account.thumbnail || profile}
-                        alt="profile"
-                        className="user-info__profile user-info__profile--pd-bot"
-                    />
+                    <input type="file" name="profile" id="profile" onChange={uploadProfile} style={{'display':'none'}}/>
+                    <label htmlFor="profile">
+                        <img
+                            src={`http://localhost:12354${account.thumbnail}`}
+                            alt="profile"
+                            className="user-info__profile user-info__profile--pd-bot"
+                        />
+                    </label>
                     {
                         <div className="user-info__intro">
                             <h1 className="user-info__title">
