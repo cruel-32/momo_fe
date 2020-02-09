@@ -69,6 +69,7 @@ function* getAccountDetail(action){
     console.log('getAccountDetail action : ', action)
     try {
         const { data, error } = yield axios.get(`/api/accounts/${action.payload._id}`);
+        console.log("TCL: function*getAccountDetail -> data", data)
         
         if(data){
             yield put({ type: accountTypes.SET_ACCOUNT, payload: data });

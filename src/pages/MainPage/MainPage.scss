@@ -20,8 +20,13 @@
     }
 
 
-    .main__card {
+    &__card {
         @include vw("margin", (100, 32, 48, 32) );
+    }
+
+    &__search-wrap {
+        @include vw("padding", (0, 32, 32, 32) );
+
     }
 
 }

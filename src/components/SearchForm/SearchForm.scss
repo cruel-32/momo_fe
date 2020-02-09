@@ -1,2 +1,106 @@
 @import 'variables';
 @import 'mixin';
+
+.search-form {
+    &__bg {
+        @include vw("padding", (18, 50));
+        @include vw("border-radius", 48);
+        @include vw("margin-bottom", 34);
+
+        display:flex;
+        background: $beige;
+        box-sizing: border-box;
+        justify-content: space-between; 
+    }
+
+    &__inp {
+        @include vw("font-size", 40);
+        max-width: 80%;
+        background: none;
+        border: none;
+        outline: none;
+
+    }
+
+    &__btn {
+        @include vw("padding", 0);
+        background: none;
+        border: none;
+    }
+    
+    &__ico {
+        @include vw("width", 56);
+        @include vw("height", 56);
+        background: none;
+        border: none;
+    }
+
+    &__hr {
+        @include vw("margin", (30,0,0,0));
+        border:none;
+        border-top:1px solid #efefef;
+    }
+}
+
+.recommended-words {
+    display:flex;
+    width:100%;
+    align-items: center;
+
+    &__title {
+        @include vw("font-size", 24);
+        display:flex;
+        color:#b8b8b8;
+        align-items: center;
+        flex:1 1 0;
+    }
+    
+    &__ico {
+        @include vw("width", 32);
+        @include vw("height", 32);
+        padding:0;
+        margin:0
+    }
+
+    &__img {
+        @include vw("width", 32);
+        @include vw("height", 32);
+        padding:0;
+        margin:0
+    }
+
+    &__list {
+        @include vw("padding-left", 20);
+        align-items: center;
+        flex:3 1 0;
+        overflow-x: scroll;
+
+        display:flex;
+        list-style: none;
+        padding:0;
+        margin:0;
+        line-height: 1;
+        -webkit-overflow-scrolling: touch;
+        /* 끝에서 바운스 되도록*/
+        scroll-snap-type: x mandatory;
+    }
+
+    &__item {
+        @include vw("font-size", 24);
+        @include vw("padding", (0, 18, 0, 0));
+        background: none;
+        border: none;
+        margin:0;
+        justify-content: flex-start;
+        flex: 0 0 auto; /* basis 를 90%로 조절함*/ scroll-snap-align: start;
+    }
+
+    &__btn {
+        background: none;
+        border: none;
+        padding:0;
+        margin:0;
+        color:#555;
+    }
+
+}
