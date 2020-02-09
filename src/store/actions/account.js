@@ -92,7 +92,10 @@ function* postProfile(action){
         
         if(data){
             console.log('postProfile data : ', data)
-            // yield put({ type: accountTypes.SET_ACCOUNT, payload: data });
+            yield put({ type: accountTypes.UPDATE_PROFILE, payload: {
+                thumbnail:data,
+                _id
+            }});
         } else {
             throw error            
         }
@@ -101,6 +104,26 @@ function* postProfile(action){
     }
 }
 
+
+function* updateProfile(action){
+    console.log("TCL: function*updateProfile -> action", action)
+    try {
+        const { _id, thumbnail } = action.payload
+        const { data, error } = yield axios.patch(`/api/accounts/${_id}`, {
+            thumbnail
+        })
+        
+        if(data){
+            yield put({ type: accountTypes.SET_ACCOUNTS, payload: data });
+        } else {
+            throw error            
+        }
+    } catch (e) {
+        console.error('목록 불러오기 : ', e)
+    }
+}
+
+
 export default function* accountSaga() {
     console.log('accountSaga : ')
     yield takeEvery(accountTypes.GET_ACCOUNT_DETAIL_ASYNC, getAccountDetail);
@@ -108,4 +131,5 @@ export default function* accountSaga() {
     yield takeEvery(accountTypes.LOGOUT_ASYNC, logoutAsync);
     yield takeEvery(accountTypes.GET_ACCOUNTS, getAccounts);
     yield takeEvery(accountTypes.UPLOAD_PROFILE, postProfile);
+    yield takeEvery(accountTypes.UPDATE_PROFILE, updateProfile);
 }
