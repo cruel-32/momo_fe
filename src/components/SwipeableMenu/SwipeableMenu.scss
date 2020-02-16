@@ -1,0 +1,11 @@
+@import 'variables';
+@import 'mixin';
+
+.swipeable-menu {
+    &--bottom {
+        position: fixed;
+        bottom:0;
+    }
+}
+
+

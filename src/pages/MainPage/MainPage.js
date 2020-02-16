@@ -4,6 +4,7 @@ import { Button, SwipeableDrawer } from '@material-ui/core'
 import { SideMenu } from 'components/SideMenu/SideMenu.js'
 import { SearchForm } from 'components/SearchForm/SearchForm.js'
 import { ThemeCard } from 'components/ThemeCard/ThemeCard.js'
+import { SwipeableMenu } from 'components/SwipeableMenu/SwipeableMenu.js'
 
 import btnLocation from 'images/icons/btn_location.svg'
 import btnMenu from 'images/icons/btn_menu.svg'
@@ -43,6 +44,18 @@ export const MainPage = props => {
                 <SearchForm />
             </div>
 
+            <SwipeableMenu>
+                <div>
+                    <button>^</button>
+                    <ul>
+                        <li><button>menu1</button></li>
+                        <li><button>menu2</button></li>
+                        <li><button>menu3</button></li>
+                        <li><button>menu4</button></li>
+                    </ul>
+                </div>
+            </SwipeableMenu>
+            
             <SwipeableDrawer
                 anchor="left"
                 open={sideState.left}

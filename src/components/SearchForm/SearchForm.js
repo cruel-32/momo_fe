@@ -11,7 +11,11 @@ export const SearchForm = props =>{
     return (
         <div className="search-form">
             <div className="search-form__bg">
-                <input className="search-form__inp" type="text" />
+                <input
+                    className="search-form__inp"
+                    type="text"
+                    // placeholder="검색어를 입력하세요"
+                />
                 <button className="search-form__btn">
                     <img className="search-form__ico" src={btnSearch} alt="search button" />
                 </button>

@@ -2,6 +2,7 @@
 @import 'mixin';
 
 .main {
+    position: relative;
     &__header {
         @include vw("padding", (32, 32, 32, 32) );
         display:flex;
