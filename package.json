@@ -62,7 +62,7 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "query-string": "^6.9.0",
-    "react": "^16.11.0",
+    "react": "^16.13.0",
     "react-app-polyfill": "^1.0.4",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
@@ -155,6 +155,10 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins" : [
+      "@babel/plugin-proposal-nullish-coalescing-operator",
+      "@babel/plugin-proposal-optional-chaining"
     ]
   },
   "devDependencies": {
@@ -164,6 +168,8 @@
     "@storybook/addon-knobs": "^5.2.8",
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addons": "^5.2.8",
-    "@storybook/react": "^5.2.8"
+    "@storybook/react": "^5.2.8",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3"
   }
 }

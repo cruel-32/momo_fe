@@ -5,6 +5,7 @@ import { SideMenu } from 'components/SideMenu/SideMenu.js'
 import { SearchForm } from 'components/SearchForm/SearchForm.js'
 import { ThemeCard } from 'components/ThemeCard/ThemeCard.js'
 import { SwipeableMenu } from 'components/SwipeableMenu/SwipeableMenu.js'
+import KakaoShareButton from 'components/Share/KakaoShareButton'
 
 import btnLocation from 'images/icons/btn_location.svg'
 import btnMenu from 'images/icons/btn_menu.svg'
@@ -35,6 +36,13 @@ export const MainPage = props => {
             </div>
 
             <div className="main__card main__card--pos-center">
+                <KakaoShareButton
+                    url="http://naver.com"
+                    title="MOMO 테스트"
+                    description="모모 테스트 중입니다"
+                >
+                    kakao 테스트 버튼
+                </KakaoShareButton>
                 <ThemeCard
                     contents={`한 주를 시작하는 월요일!<br/>무료함을 달래봐요.`}
                 />
