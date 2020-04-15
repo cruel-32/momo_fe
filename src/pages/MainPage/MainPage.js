@@ -28,95 +28,94 @@ export const MainPage = props => {
 
     const validate = () => {
         const valid = validator.validate({
-            empty:null,
-            testCode : "hahaha",
-            timer:"06:30",
-            startDt:'2019-01',
-            endDt:'2019-01-02 11:11',
+            timer:"06:30:11",
+            startDt:'2019-01-01',
+            endDt:'2019-01-02 11:11:00',
             email:'test',
-            phone:'02-1234',
-            crNo : '가나다라', //"1가1234", //
-            perfInspId : 500,
+            phone:'02-1234-1234',
+            crNo : "1가1234", //'가나다라', //
+            perfInspId : 50,
+            dspl:50,
             listA : [
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
             ],
             listB : [
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "csh",
+                    age : 22,
                 },
             ],
             optionList : [
-                "한글", "한두글자", "123456789"
+                "한글자", "한두글자", "1234 "
             ],
             choiceOPTList : [
                 {
-                    name : 100000,
-                    age : 9,
+                    name : "test",
+                    age : 22,
                 },
                 {
                     name : 'ABCD',
                     age : 55,
                 },
                 {
-                    name : 'ABCDEF',
+                    name : 'ABCD',
                     age : 20,
                 },
             ],
             test : {
-                name : 'ABCDEF',
-                age : 60,
+                name : 'ABCD',
+                age : 40,
             },
         });
         console.log("validate -> valid", valid)
@@ -178,47 +177,38 @@ export const MainPage = props => {
 
 const validation = {
     empty : {
-        label : '공허'
     },
     startDt : {
         format:'date',
-        label : '시작일'
     },
     timer : {
         format:'time',
-        label : '타이머'
     },
     endDt : {
         format:'dateTime',
-        label : '종료일'
     },
     email : {
         format : 'email',
-        label : '이메일'
     },
     phone : {
         format:'phone',
-        label : '전화번호'
     },
     crNo: {
         format: 'crNo',
-        label : '차량번호'
     }, // 차량번호
     perfInspId: {
         type: 'number',
         minimum : 20,
         maximum : 50,
-        label : '차량등록번호'
     },
     dspl: {
         type: 'number',
         maximum : 100,
-        label : '몰라'
     }, // 배기량
     listA : {
         type: 'array',
-        minItems : 2,
-        maxItems : 10,
+        minItems : 1,
+        maxItems : 50,
         items : {
             type : "object",
             properties : {
@@ -226,20 +216,17 @@ const validation = {
                   type : 'string',
                   minLength : 2,
                   maxLength : 5,
-                  label : '선택옵션 이름'
                 },
                 age : {
                   type : 'number',
                   minimum : 10,
-                  label : '선택옵션 나이'
                 },
             }
         },
-        label : "리스트A"
     },
     listB : {
         type: 'array',
-        minItems : 2,
+        minItems : 1,
         maxItems : 10,
         items : {
             type : "object",
@@ -248,16 +235,13 @@ const validation = {
                   type : 'string',
                   minLength : 2,
                   maxLength : 5,
-                  label : '선택옵션 이름'
                 },
                 age : {
                   type : 'number',
                   minimum : 10,
-                  label : '선택옵션 나이'
                 },
             }
         },
-        label : "리스트B"
     },
     listC : {
         type: 'array',
@@ -270,16 +254,13 @@ const validation = {
                   type : 'string',
                   minLength : 2,
                   maxLength : 5,
-                  label : '선택옵션 이름'
                 },
                 age : {
                   type : 'number',
                   minimum : 10,
-                  label : '선택옵션 나이'
                 },
             }
         },
-        label : "리스트C"
     },
     optionList: {
         type: 'array',
@@ -287,9 +268,7 @@ const validation = {
             type: 'string',
             minLength : 3,
             maxLength : 8,
-            label : '옵션아이템'
         },
-        label : '옵션목록'
     }, // 옵션
     choiceOPTList: {
         type: 'array',
@@ -300,12 +279,10 @@ const validation = {
                 type : 'string',
                 minLength : 2,
                 maxLength : 5,
-                label : '선택옵션 이름'
               },
               age : {
                 type : 'number',
                 minimum : 10,
-                label : '선택옵션 나이'
               },
           }
         }
@@ -314,7 +291,6 @@ const validation = {
         type : "string",
         minimum : 2,
         maximum : 4,
-        label : '옵션'
     },
     test : {
         type: 'object',
@@ -330,7 +306,6 @@ const validation = {
               maximum : 50,
             },
         },
-        label : '테스트'
     }
 }
 
@@ -376,5 +351,5 @@ const values2 = {
 }
 
 const validator = createValidator(validation, {
-    required : ["dspl","option", "listC"]
+    required : ["dspl"]
 });
