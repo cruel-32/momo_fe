@@ -1,6 +1,8 @@
 import React, { useState,  } from 'react'
 import { Button, SwipeableDrawer } from '@material-ui/core'
 
+import { createValidator } from 'lib/validation/index.js';
+
 import { SideMenu } from 'components/SideMenu/SideMenu.js'
 import { SearchForm } from 'components/SearchForm/SearchForm.js'
 import { ThemeCard } from 'components/ThemeCard/ThemeCard.js'
@@ -24,8 +26,106 @@ export const MainPage = props => {
         setSideState({ ...sideState, [side]: open })
     }
 
+    const validate = () => {
+        const valid = validator.validate({
+            empty:null,
+            testCode : "hahaha",
+            timer:"06:30",
+            startDt:'2019-01',
+            endDt:'2019-01-02 11:11',
+            email:'test',
+            phone:'02-1234',
+            crNo : '가나다라', //"1가1234", //
+            perfInspId : 500,
+            listA : [
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 100000,
+                    age : 9,
+                },
+            ],
+            listB : [
+                {
+                    name : 100000,
+                    age : 9,
+                },
+            ],
+            optionList : [
+                "한글", "한두글자", "123456789"
+            ],
+            choiceOPTList : [
+                {
+                    name : 100000,
+                    age : 9,
+                },
+                {
+                    name : 'ABCD',
+                    age : 55,
+                },
+                {
+                    name : 'ABCDEF',
+                    age : 20,
+                },
+            ],
+            test : {
+                name : 'ABCDEF',
+                age : 60,
+            },
+        });
+        console.log("validate -> valid", valid)
+
+    }
+
     return (
         <div className="main">
+            <button onClick={validate}>validation test</button>
             <div className="main__header">
                 <Button className="main__btn"  onClick={toggleDrawer('left', true)}>
                     <img className="main__icon"  src={btnMenu} alt="menu" />
@@ -75,3 +175,206 @@ export const MainPage = props => {
         </div>
     )
 }
+
+const validation = {
+    empty : {
+        label : '공허'
+    },
+    startDt : {
+        format:'date',
+        label : '시작일'
+    },
+    timer : {
+        format:'time',
+        label : '타이머'
+    },
+    endDt : {
+        format:'dateTime',
+        label : '종료일'
+    },
+    email : {
+        format : 'email',
+        label : '이메일'
+    },
+    phone : {
+        format:'phone',
+        label : '전화번호'
+    },
+    crNo: {
+        format: 'crNo',
+        label : '차량번호'
+    }, // 차량번호
+    perfInspId: {
+        type: 'number',
+        minimum : 20,
+        maximum : 50,
+        label : '차량등록번호'
+    },
+    dspl: {
+        type: 'number',
+        maximum : 100,
+        label : '몰라'
+    }, // 배기량
+    listA : {
+        type: 'array',
+        minItems : 2,
+        maxItems : 10,
+        items : {
+            type : "object",
+            properties : {
+                name : {
+                  type : 'string',
+                  minLength : 2,
+                  maxLength : 5,
+                  label : '선택옵션 이름'
+                },
+                age : {
+                  type : 'number',
+                  minimum : 10,
+                  label : '선택옵션 나이'
+                },
+            }
+        },
+        label : "리스트A"
+    },
+    listB : {
+        type: 'array',
+        minItems : 2,
+        maxItems : 10,
+        items : {
+            type : "object",
+            properties : {
+                name : {
+                  type : 'string',
+                  minLength : 2,
+                  maxLength : 5,
+                  label : '선택옵션 이름'
+                },
+                age : {
+                  type : 'number',
+                  minimum : 10,
+                  label : '선택옵션 나이'
+                },
+            }
+        },
+        label : "리스트B"
+    },
+    listC : {
+        type: 'array',
+        minItems : 2,
+        maxItems : 10,
+        items : {
+            type : "object",
+            properties : {
+                name : {
+                  type : 'string',
+                  minLength : 2,
+                  maxLength : 5,
+                  label : '선택옵션 이름'
+                },
+                age : {
+                  type : 'number',
+                  minimum : 10,
+                  label : '선택옵션 나이'
+                },
+            }
+        },
+        label : "리스트C"
+    },
+    optionList: {
+        type: 'array',
+        items: {
+            type: 'string',
+            minLength : 3,
+            maxLength : 8,
+            label : '옵션아이템'
+        },
+        label : '옵션목록'
+    }, // 옵션
+    choiceOPTList: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties : {
+              name : {
+                type : 'string',
+                minLength : 2,
+                maxLength : 5,
+                label : '선택옵션 이름'
+              },
+              age : {
+                type : 'number',
+                minimum : 10,
+                label : '선택옵션 나이'
+              },
+          }
+        }
+    }, // 옵션
+    option : {
+        type : "string",
+        minimum : 2,
+        maximum : 4,
+        label : '옵션'
+    },
+    test : {
+        type: 'object',
+        properties : {
+            name : {
+              type : 'string',
+              minLength : 2,
+              maxLength : 5,
+            },
+            age : {
+              type : 'number',
+              minimum : 10,
+              maximum : 50,
+            },
+        },
+        label : '테스트'
+    }
+}
+
+const values1 = {
+    crNo : '가나다라', //"1가1234", //
+    perfInspId : 10,
+    optionList : [
+        "한글", "한두글자", "123456789"
+    ],
+    choiceOPTList : [
+        {
+            name : 'A',
+            age : 9,
+        },
+        {
+            name : 'ABCD',
+            age : 55,
+        },
+        {
+            name : 'ABCDEF',
+            age : 20,
+        },
+    ],
+    test : {
+        name : 'ABCDEF',
+        age : 20,
+    },
+    option : '',
+}
+
+const values2 = {
+    crNo : '1가1234',
+    perfInspId : 50,
+    optionList : [
+        "한글", "한두글자", "123456789"
+    ],
+    choiceOPTList : [
+    ],
+    test : {
+        name : 'ABCDEF',
+        age : 20,
+    },
+}
+
+const validator = createValidator(validation, {
+    required : ["dspl","option", "listC"]
+});
